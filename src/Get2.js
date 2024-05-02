@@ -26,7 +26,7 @@ function GetData2Component() {
   
   return (
     <div>
-      <h2>Movies:</h2>
+      <h2>Books:</h2>
       <ul>
         {movies.map(movie => (
           <li key={movie.title}>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import GetData1Component from "./Get1";
 // import GetData1Component from  "./Get1";
 
 
@@ -44,9 +45,9 @@ function CreateMovieForm() {
 
   return (
     <div>
-      <h2>Create Movie</h2>
+      <h2>Add Book</h2>
       {/* <GetData1Component setActors={setActors} /> */}
-      
+      <GetData1Component/>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
@@ -76,7 +77,7 @@ function CreateMovieForm() {
           />
         </div>
         <div>
-        <div>
+        
           <label>Actor ID:</label>
           <input
             type="number"
@@ -84,9 +85,10 @@ function CreateMovieForm() {
             value={formData.actor_id}
             onChange={handleChange}
           />
+        
         </div>
-        </div>
-        <button type="submit">Save Movie</button>
+        
+        <button type="submit">Save Book</button>
       </form>
     </div>
   );

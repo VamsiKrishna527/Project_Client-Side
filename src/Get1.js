@@ -27,7 +27,7 @@ function GetData1Component() {
   
   return (
     <div>
-      <h2>Actors:</h2>
+      <h2>Authors:</h2>
       <ul>
         {actors.map(actor => (
           <li key={actor.id}>
