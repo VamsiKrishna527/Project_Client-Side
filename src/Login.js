@@ -5,7 +5,8 @@ const Login = () => {
     username: '',
     password: ''
   });
-
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -30,15 +31,21 @@ const Login = () => {
       }
 
       const data = await response.json();
-      // Assuming the server responds with a JWT token
+      // The server responds with a JWT token
       localStorage.setItem('token', data.token);
-      // Redirect or update UI
+      setSuccessMessage("Login is successful");
+      setErrorMessage("");
     } catch (error) {
-      console.error('Login failed:', error.message);
+      console.error('Login failed:', error);
+      setErrorMessage("Failed to login");
+      setSuccessMessage("");
     }
   };
 
   return (
+    <div>
+      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -56,6 +63,7 @@ const Login = () => {
       />
       <button type="submit">Login</button>
     </form>
+    </div>
   );
 };
 

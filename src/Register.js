@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -7,7 +7,8 @@ const Register = () => {
     password: "",
     name: "",
   });
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,27 +20,44 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      // const response = await fetch("http://127.0.0.1:8000/register/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(formData),
+      // });
+
+      // if (!response.ok) {
+      //   throw new Error("Registration failed");
+      // }
+      // const data = await response.json();
+      // console.log("Registration successful", data);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/register/",
+        formData
+      );
+      
+      console.log("Data saved successfully:", response.data);
+      setSuccessMessage("Registering user is successful");
+      setErrorMessage("");
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        name: "",
       });
-
-      if (!response.ok) {
-        throw new Error("Registration failed");
-      }
-
-      // Optionally, you can handle the successful registration response here
-      const data = await response.json();
-      console.log("Registration successful", data);
     } catch (error) {
       console.error("Registration failed:", error.message);
+      setErrorMessage("Failed to register the user");
+      setSuccessMessage("");
     }
   };
 
   return (
+    <div>
+    {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+    {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -71,6 +89,7 @@ const Register = () => {
       />
       <button type="submit">Register</button>
     </form>
+    </div>
   );
 };
 

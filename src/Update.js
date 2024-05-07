@@ -23,6 +23,7 @@ const MovieUpdate = () => {
       },
     });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +57,7 @@ const MovieUpdate = () => {
         placeholder="Book Name"
         value={formData.movie_name}
         onChange={(e) => setFormData({ ...formData, movie_name: e.target.value })}
+        
       />
       <input
         type="text"
@@ -63,6 +65,7 @@ const MovieUpdate = () => {
         placeholder="Author ID"
         value={formData.actor_id}
         onChange={(e) => setFormData({ ...formData, actor_id: e.target.value })}
+        
       />
       <input
         type="text"
